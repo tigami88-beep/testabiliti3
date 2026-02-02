@@ -2,19 +2,21 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        // Первый кредит: 1 000 000, 12% годовых, на 24 месяца
-        CreditPaymentService cs1 = new CreditPaymentService(1_000_000, 12.0, 24);
-        double payment1 = cs1.calculate();
-        System.out.printf("Ежемесячный платеж 1: %.2f%n", payment1);
+        CreditPaymentService service = new CreditPaymentService();
 
-        // Второй кредит: 50000, 7.5% годовых, на 60 месяцев
-        CreditPaymentService cs2 = new CreditPaymentService(50_000, 7.5, 60);
-        double payment2 = cs2.calculate();
-        System.out.printf("Ежемесячный платеж 2: %.2f%n", payment2);
+        double principal = 1_000_000; // 1 миллион рублей
+        double annualInterestRate = 9.99; // ставка 9,99%
 
-        // Третий кредит: 250000, 0% годовых, на 36 месяцев
-        CreditPaymentService cs3 = new CreditPaymentService(250_000, 0.0, 36);
-        double payment3 = cs3.calculate();
-        System.out.printf("Ежемесячный платеж 3: %.2f%n", payment3);
+        // Расчет для 1-го года
+        double payment1Year = service.calculate(principal, annualInterestRate, 1);
+        System.out.printf("На 1 год, платеж: %.0f рублей%n", payment1Year);
+
+        // Расчет для 2 лет
+        double payment2Years = service.calculate(principal, annualInterestRate, 2);
+        System.out.printf("На 2 года, платеж: %.0f рублей%n", payment2Years);
+
+        // Расчет для 3 лет
+        double payment3Years = service.calculate(principal, annualInterestRate, 3);
+        System.out.printf("На 3 года, платеж: %.0f рублей%n", payment3Years);
     }
 }
